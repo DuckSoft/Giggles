@@ -1,7 +1,31 @@
 <?php
-// TODO: Auth-Login
-// TODO: Bootstrap beautify
+require "swinggy.php";
+
+const status_not_logged_in = 1;
+const status_logged_in = 2;
+$sw = new Swinggy([
+        status_init =>
+            function(){
+                session_start();
+                return false;
+            },
+        status_not_logged_in =>
+            function(){
+                return !isset($_SESSION["user"]);
+            }
+]);
+$sw->ready();
+$sw->set([
+   "before" =>
+       function($boku){
+            if ($boku->stat == status_not_logged_in) {
+                header("Location: login.php");
+                die();
+            }
+       }
+]);
 ?>
+<?php $sw->go("before") ?>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
