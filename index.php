@@ -37,8 +37,8 @@ $sw->set([
             <h2>Giggles<small>在线的离线下载工具</small></h2>
         </header>
         <main>
+            <a href="login.php">用户中心</a>
             <form action="download.php">
-                <input type="hidden" name="go" value="download" /><br />
                 <label for="url">url: </label><input type="url" id="url" name="url" value="https://www.baidu.com/" /><br />
                 <input type="submit" value="go" />
                 <input type="reset" value="reset" />
