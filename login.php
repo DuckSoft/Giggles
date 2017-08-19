@@ -42,6 +42,8 @@ $sw->set([
                     $_SESSION["user"] = "ducksoft";
                     header("Location: login.php");
                     die();
+                } else {
+                    // TODO: wrong password!
                 }
                 // not necessary. just for fun
                 break;
@@ -55,13 +57,13 @@ $sw->set([
     "status" => function($boku){
         switch ($boku->stat) {
             case status_not_logged_in:
-                echo "You haven't logged in yet!";
+                echo "要使用本服务，请先登录！";
                 break;
             case status_logged_in:
-                echo "Logged in as <b>" . $_SESSION['user'] . "</b>!";
+                echo "欢迎用户<b>" . $_SESSION['user'] . "</b>！";
                 break;
             case status_log_out:
-                echo "User <b>" . $boku->stor["user"] . "</b> have successfully logged out!";
+                echo "恭送用户<b>" . $boku->stor["user"] . "</b>！";
                 break;
             default:
                 die("there is a bug!");
@@ -71,11 +73,23 @@ $sw->set([
         switch ($boku->stat) {
             case status_not_logged_in:
                 echo <<<EOF
-<form method="post" action="login.php">
-    <label for="user">Username:</label><input id="user" name="user" maxlength="16" /><br />
-    <label for="pass">Password:</label><input type="password" id="pass" name="pass" maxlength="32" /><br />
-    <input type="submit" value="go" /><input type="reset" value="reset" />
-</form>
+<div class="panel panel-primary">
+    <div class="panel-heading">用户登录</div>
+    <div class="panel-body">
+        <div class="container-fluid">
+        <div class="row">
+        <form class="form-horizontal" method="post" action="login.php">
+            <label class="form-control-static" for="user">用户名:</label>
+            <input class="form-control" id="user" name="user" maxlength="16" placeholder="username" /><br />
+            <label class="form-control-static" for="pass">密码:</label>
+            <input class="form-control" type="password" id="pass" name="pass" maxlength="32" placeholder="password" /><br />
+            <input class="btn btn-success" type="submit" value="go" />
+            <input class="btn btn-default" type="reset" value="reset" />
+        </form>
+        </div>
+        </div>
+    </div>
+</div>
 EOF;
                 break;
             case status_logged_in:
@@ -102,13 +116,29 @@ EOF;
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>Giggles Login</title>
+    <link href="bootstrap.min.css" rel="stylesheet" />
 </head>
 <body>
-    <h2>Login</h2>
-    <div id="status"><?php $sw->go("status")?></div>
-    <hr/>
-    <div id="main"><?php $sw->go("main")?></div>
-    <hr/>
-    <div id="footer">Powered by <a href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>.</div>
-</body>
+    <div class="navbar">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand">Giggles</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="nav-tabs-justified"><a href="index.php">离线下载</a></li>
+                <li class="nav-tabs"><a href="login.php">用户中心</a></li>
+                <li class="nav-tabs-justified"><a href="https://github.com/DuckSoft/Giggles" target="_blank">GitHub</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="alert alert-info"><?php $sw->go("status")?></div>
+            <div id="main"><?php $sw->go("main")?></div>
+            <hr/>
+            <small>Copyleft 2017 DuckSoft. Code Powered by <a href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+        </div>
+    </div>
+    </body>
 </html>

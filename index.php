@@ -30,19 +30,39 @@ $sw->set([
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Giggles</title>
+        <link href="bootstrap.min.css" rel="stylesheet" />
     </head>
 
     <body>
-        <header>
-            <h2>Giggles<small>在线的离线下载工具</small></h2>
-        </header>
-        <main>
-            <a href="login.php">用户中心</a>
-            <form action="download.php">
-                <label for="url">url: </label><input type="url" id="url" name="url" value="https://www.baidu.com/" /><br />
-                <input type="submit" value="go" />
-                <input type="reset" value="reset" />
-            </form>
-        </main>
-    </body>
+        <div class="navbar">
+            <div class="container">
+                <div class="navbar-header">
+                    <a class="navbar-brand">Giggles</a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li class="nav-tabs"><a href="index.php">离线下载</a></li>
+                    <li class="nav-tabs-justified"><a href="login.php">用户中心</a></li>
+                    <li class="nav-tabs-justified"><a href="https://github.com/DuckSoft/Giggles" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">新建离线下载...</div>
+                    <div class="panel-body">
+                        <form class="form-horizontal" action="download.php">
+                            <fieldset>
+                                <label for="url">下载地址：</label><input class="form-control" type="url" id="url" name="url" placeholder="HTTP/HTTPS/FTP 地址..." /><br/>
+                                <input class="btn btn-default btn-success" type="submit" value="开始下载" />
+                                <input class="btn" type="reset" value="清空" />
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+                <hr />
+                <small>Copyleft 2017 DuckSoft. Code Powered by <a href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+            </div>
+        </div>
+       </body>
 </html>
