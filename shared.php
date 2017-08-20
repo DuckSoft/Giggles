@@ -3,6 +3,13 @@
 const navbar_index = 0;
 const navbar_login = 1;
 
+function insert_footer() {
+    echo <<<EOF
+<hr/>
+<small>Copyleft 2017 DuckSoft. Code Powered by <a target="_blank" href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+EOF;
+}
+
 function insert_navbar($active) {
     echo <<<EOF
 <div class="navbar navbar-default">

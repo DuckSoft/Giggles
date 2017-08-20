@@ -51,8 +51,7 @@ $sw->set([
 </form>
 </div>
 </div>
-<hr />
-<small>Copyleft 2017 DuckSoft. Code Powered by <a target="_blank" href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+<?php insert_footer() ?>
 </div>
 </div>
 </body>
