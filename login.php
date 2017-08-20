@@ -11,7 +11,7 @@ $sw = new Swinggy([
         return false;
     },
     status_log_out => function(){
-        if ($_GET["logout"] == "yes") {
+        if (!empty($_GET["logout"]) and !empty($_SESSION["user"])) {
             return true;
         } else {
             return false;
@@ -55,23 +55,28 @@ $sw->set([
         }
     },
     "status" => function($boku){
+        echo "<div class=\"alert alert-";
         switch ($boku->stat) {
             case status_not_logged_in:
-                echo "要使用本服务，请先登录！";
+                echo "info\">要使用本服务，请先登录！";
                 break;
             case status_logged_in:
-                echo "欢迎用户<b>" . $_SESSION['user'] . "</b>！";
+                echo "success\">欢迎用户<b>" . $_SESSION['user'] . "</b>！";
                 break;
             case status_log_out:
-                echo "恭送用户<b>" . $boku->stor["user"] . "</b>！";
+                echo "success\">您已成功登出，<b>" . $boku->stor["user"] . "</b>！";
                 break;
-            default:
-                die("there is a bug!");
+            case status_login_validation:
+                // if executed here, you are not permitted
+                echo "danger\">您输入的登录信息未能通过验证！";
         }
+        echo "</div>";
     },
     "main" => function($boku){
         switch ($boku->stat) {
             case status_not_logged_in:
+            case status_login_validation:
+            case status_log_out:
                 echo <<<EOF
 <div class="panel panel-primary">
     <div class="panel-heading">用户登录</div>
@@ -102,11 +107,6 @@ Actions available:
 </ul>
 EOF;
                 break;
-            case status_log_out:
-                echo <<<EOF
-<a href="login.php">Re-login&gt;&gt;&gt;</a>
-EOF;
-                break;
         }
     }
 ]);
@@ -134,10 +134,10 @@ EOF;
 
     <div class="container">
         <div class="row">
-            <div class="alert alert-info"><?php $sw->go("status")?></div>
+            <?php $sw->go("status")?>
             <div id="main"><?php $sw->go("main")?></div>
             <hr/>
-            <small>Copyleft 2017 DuckSoft. Code Powered by <a href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+            <small>Copyleft 2017 DuckSoft. Code Powered by <a target="_blank" href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
         </div>
     </div>
     </body>
