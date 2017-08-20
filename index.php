@@ -48,7 +48,7 @@ $sw->set([
         </div>
         <div class="container">
             <div class="row">
-                <div class="panel panel-default">
+                <div class="panel panel-primary">
                     <div class="panel-heading">新建离线下载...</div>
                     <div class="panel-body">
                         <form class="form-horizontal" action="download.php">
@@ -61,7 +61,7 @@ $sw->set([
                     </div>
                 </div>
                 <hr />
-                <small>Copyleft 2017 DuckSoft. Code Powered by <a href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
+                <small>Copyleft 2017 DuckSoft. Code Powered by <a target="_blank" href="https://github.com/DuckSoft/Swinggy">Swinggy Engine</a>. NO WARRANTY!</small>
             </div>
         </div>
        </body>
