@@ -75,10 +75,7 @@ $sw->set([
             case status_not_logged_in:
             case status_login_validation:
             case status_log_out:
-                echo <<<EOF
-<div class="panel panel-primary">
-<div class="panel-heading">用户登录</div>
-<div class="panel-body">
+                insert_panel("panel-primary","用户登录",<<<EOF
 <div class="container-fluid">
 <div class="row">
 <form class="form-horizontal" method="post" action="login.php">
@@ -91,19 +88,18 @@ $sw->set([
 </form>
 </div>
 </div>
-</div>
-</div>
-EOF;
+EOF
+                );
                 break;
             case status_logged_in:
-                echo <<<EOF
-Actions available:
-<ul>
-<li><a href="index.php">go downloading</a></li>
-<li><a href="login.php?logout=yes">&lt;&lt;&lt;log out</a></li>
-<li>... to be developed</li>
+                insert_panel("panel-default","用户操作",<<<EOF
+<ul class="nav nav-pills nav-stacked">
+<li><a href="index.php">转到下载页面&gt;&gt;&gt;</a></li>
+<li><a href="login.php?logout=yes">&lt;&lt;&lt;安全登出</a></li>
+<li></li>
 </ul>
-EOF;
+EOF
+                );
                 break;
         }
     }
